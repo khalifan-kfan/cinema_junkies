@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Cinema Junkie</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_personal">History</string>
+    <string name="title_Days">Week days</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in </string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="create">I have no account!</string>
+    <string name="create3">make account</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="signup_failed">"Login up failed"</string>
+    <string name="phone_number">Number should be >9 characters</string>
+    <string name="Confirm">Password should be similar</string>
+    <string name="welcome2">"Hello there, please sign up ! "</string>
+    <string name="number">077......</string>
+    <string name="kxy_email_com">kxy@email.com</string>
+    <string name="password">password</string>
+    <string name="to_time">Next</string>
+    <string name="confirm_password">confirm password</string>
+    <string name="book_date">Screening Days</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_times">Cinema times</string>
+    <string name="title_Seats">Seats</string>
+    <string name="money">Shs0</string>
+    <string name="pay">MoMo Book</string>
+    <string name="payment">Pay</string>
+    <string name="enter_number">Enter number active on MTN M.M</string>
+</resources>

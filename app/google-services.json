@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "213552580861",
+    "project_id": "moviecataloge",
+    "storage_bucket": "moviecataloge.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:213552580861:android:fa44d4cb0a28582cc49694",
+        "android_client_info": {
+          "package_name": "com.example.cataloge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "213552580861-s5of2kh31l1aila48aii86oekoh0kobi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtQt4J2zMqyzaLrQLbGDHfpODoWVcrDe0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "213552580861-s5of2kh31l1aila48aii86oekoh0kobi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

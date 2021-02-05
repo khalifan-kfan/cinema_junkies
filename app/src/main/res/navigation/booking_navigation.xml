@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/booking_navigation"
+    app:startDestination="@id/navigation_days">
+
+    <fragment
+        android:id="@+id/navigation_days"
+        android:name="com.example.cataloge.ui.booking.Day_picked_Fragment"
+        android:label="@string/title_Days"
+        tools:layout="@layout/fragment_item_list" >
+        <action
+            android:id="@+id/action_navigation_days_to_navigation_cine_times"
+            app:destination="@id/navigation_cine_times"
+            app:enterAnim="@anim/nav_default_pop_exit_anim"
+            app:exitAnim="@anim/nav_default_pop_enter_anim"
+           />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_cine_times"
+        android:name="com.example.cataloge.ui.booking.cinema_time_Fragment"
+        android:label="@string/title_times"
+        tools:layout="@layout/cinema_time__fragment" >
+        <action
+            android:id="@+id/action_navigation_cine_times_to_navigation_seats"
+            app:destination="@id/navigation_seats"
+            app:enterAnim="@anim/nav_default_pop_enter_anim"
+            app:exitAnim="@anim/nav_default_pop_enter_anim"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_seats"
+        android:name="com.example.cataloge.ui.booking.SeatsFragment"
+        android:label="@string/title_Seats"
+        tools:layout="@layout/fragment_seats" />
+
+
+</navigation>
