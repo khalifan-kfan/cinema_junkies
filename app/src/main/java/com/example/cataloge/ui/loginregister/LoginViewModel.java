@@ -1,9 +1,8 @@
-package com.example.cataloge.ui.logreg;
+package com.example.cataloge.ui.loginregister;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import android.app.Application;
 import android.util.Patterns;

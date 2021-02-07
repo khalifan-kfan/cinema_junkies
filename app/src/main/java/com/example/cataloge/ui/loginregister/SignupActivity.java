@@ -1,4 +1,4 @@
-package com.example.cataloge.ui.logreg;
+package com.example.cataloge.ui.loginregister;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -22,13 +22,14 @@ import android.widget.Toast;
 
 import com.example.cataloge.MainActivity;
 import com.example.cataloge.R;
-import com.google.firebase.auth.FirebaseUser;
+import com.example.cataloge.ui.home.HomeFragment;
 
 public class SignupActivity extends AppCompatActivity {
 
     private  SignupviewModel viewModal;
     private SignUpViewModelFactory factory;
-    UserStateChange listener;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class SignupActivity extends AppCompatActivity {
         viewModal = new ViewModelProvider(this)
                 .get(SignupviewModel.class);
 
-        listener= (UserStateChange) this;
+
         final EditText emailEditText = findViewById(R.id.editTextTextEmailAddress);
         final EditText numberEditText = findViewById(R.id.editTextNumber);
         final EditText passEditText = findViewById(R.id.editTextTextPassword);
@@ -134,7 +135,7 @@ public class SignupActivity extends AppCompatActivity {
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-        listener.makeStateTrue();
+
         setResult(Activity.RESULT_OK);
         //Complete and destroy login activity once successful
         Intent i = new Intent(SignupActivity.this, MainActivity.class);

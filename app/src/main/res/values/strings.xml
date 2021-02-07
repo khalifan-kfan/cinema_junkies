@@ -33,4 +33,13 @@
     <string name="pay">MoMo Book</string>
     <string name="payment">Pay</string>
     <string name="enter_number">Enter number active on MTN M.M</string>
+    <string name="by">By:</string>
+    <string name="date">Date;</string>
+    <string name="Seats">Seats;</string>
+    <string name="tot">Paid</string>
+    <string name="warn">A click on this  button renders the ticket used, it should be clicked by the agent as you enter the cinema.</string>
+    <string name="backToLogin">Click here to login and view or buy your Ticket!</string>
+    <string name="On">on</string>
+    <string name="expired">off</string>
+    <string name="take_off">Cancel this ticket for its expired, click the red cancel buttton up</string>
 </resources>

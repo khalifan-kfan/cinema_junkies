@@ -64,7 +64,7 @@ public class AppRepo  {
 
     private void loadMovies() {
         List<Movie>  movieslist = new ArrayList<>();
-        Toast.makeText(app.getBaseContext(), "load started", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(app.getBaseContext(), "load started", Toast.LENGTH_SHORT).show();
       db.collection("Movies").addSnapshotListener(new EventListener<QuerySnapshot>() {
            @Override
                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {

@@ -13,9 +13,9 @@
         android:theme="@style/Theme.Cataloge">
         <activity android:name=".ui.MTN.MtnPayActivities"></activity>
         <activity android:name=".ui.booking.BookingActivity" />
-        <activity android:name=".ui.logreg.SignupActivity" />
+        <activity android:name=".ui.loginregister.SignupActivity" />
         <activity
-            android:name=".ui.logreg.LoginActivity"
+            android:name=".ui.loginregister.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
             android:name=".MainActivity"
@@ -25,6 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".Services.TransactionsStatusService" />
     </application>
 
 </manifest>

@@ -11,6 +11,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.cataloge.ui.MTN.FixedValues;
 import com.example.cataloge.ui.booking.data.CinemaHall;
 import com.example.cataloge.ui.booking.data.Days;
 import com.example.cataloge.ui.booking.data.MovieTimes;
@@ -78,20 +79,20 @@ public class SharedViewmodel extends AndroidViewModel {
 
     public  void setDay_id(Days day_infor){
         day_id.setValue(day_infor.DocIds);
-        Add_to_Selection("date",day_infor.getAbsolute_date());
-        Add_to_Selection("price",day_infor.getDay_price());
-        Add_to_Selection("day_id",day_infor.DocIds);
+        Add_to_Selection(FixedValues.date,day_infor.getAbsolute_date());//1
+        Add_to_Selection(FixedValues.price,day_infor.getDay_price());//2
+        Add_to_Selection(FixedValues.day_id,day_infor.DocIds);//3
     }
     public  void setCinema_id(String id){
         cinema_id.setValue(id);
-        Add_to_Selection("cinema_id",id);
+        Add_to_Selection(FixedValues.cinema_id,id);//4
     }
     public  void setTime_id(MovieTimes time){
         time_id.setValue(time.DocIds);
         this.time_seats.setValue(time.getAvailabe_seats());
 
-        Add_to_Selection("time",time.getMovie_time());
-        Add_to_Selection("time_id",time.DocIds);
+        Add_to_Selection(FixedValues.time,time.getMovie_time());//5
+        Add_to_Selection(FixedValues.time_id,time.DocIds);//6
     }
 
     public MutableLiveData<String> getDay_id() {
@@ -101,10 +102,10 @@ public class SharedViewmodel extends AndroidViewModel {
     public void setMovieID(Movie movieId,String id){
         movieID.setValue(id);
        // Toast.makeText(getApplication().getBaseContext(),movieId.getTitle(),Toast.LENGTH_SHORT).show();
-        Add_to_Selection("Title",movieId.getTitle());
-        Add_to_Selection("definition",movieId.getDefinition());
-        Add_to_Selection("pic_link",movieId.getPicture_link());
-        Add_to_Selection("movie_id",id);
+        Add_to_Selection(FixedValues.Title,movieId.getTitle());//7
+        Add_to_Selection(FixedValues.definition,movieId.getDefinition());//8
+        Add_to_Selection(FixedValues.pic_link,movieId.getPicture_link());//9
+        Add_to_Selection(FixedValues.movie_id,id);//10
     }
 
     public MutableLiveData<String> getMovieID(){

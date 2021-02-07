@@ -1,4 +1,4 @@
-package com.example.cataloge.ui.logreg;
+package com.example.cataloge.ui.loginregister;
 
 /**
  * Class exposing authenticated user details to the UI.

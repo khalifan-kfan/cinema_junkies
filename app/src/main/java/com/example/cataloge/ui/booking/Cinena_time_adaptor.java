@@ -52,7 +52,7 @@ public class Cinena_time_adaptor  extends RecyclerView.Adapter<Cinena_time_adapt
                     if(!holder.name.getText().toString().toLowerCase().contains("pick")){
                         holder.Iv.setImageResource(R.drawable.less_);
                         holder.name.setBackgroundResource(R.color.teal_700);
-                        holder.name.setText(MessageFormat.format("Pick From{0}", my_halls.get(position).getName()));
+                        holder.name.setText(MessageFormat.format("Pick From {0}", my_halls.get(position).getName()));
                         // call interface to open
                         moreorless.openOrclose(my_halls.get(position).DocIds,my_halls.get(position).getName());
                     }else {

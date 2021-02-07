@@ -1,12 +1,10 @@
-package com.example.cataloge.ui.logreg;
+package com.example.cataloge.ui.loginregister;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-
-import com.example.cataloge.ui.home.HomeViewModel;
 
 public class LoginViewModelFactory implements ViewModelProvider.Factory {
     Application app;

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,21 +27,17 @@ import com.bumptech.glide.Glide;
 import com.example.cataloge.MainActivity;
 import com.example.cataloge.R;
 import com.example.cataloge.ui.booking.BookingActivity;
-import com.example.cataloge.ui.logreg.LoginActivity;
-import com.example.cataloge.ui.logreg.UserStateChange;
+import com.example.cataloge.ui.loginregister.LoginActivity;
+import com.example.cataloge.ui.loginregister.UserStateChange;
 import com.example.cataloge.ui.model.Movie;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.ms.square.android.expandabletextview.ExpandableTextView;
 
-import java.io.Serializable;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class HomeFragment extends Fragment implements UserStateChange {
+public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     private HomeViewModelFactory factory;
@@ -68,7 +63,7 @@ public class HomeFragment extends Fragment implements UserStateChange {
         homeViewModel.getMovie().observe((LifecycleOwner) container.getContext(), new Observer<List<Movie>>() {
             @Override
             public void onChanged(List<Movie> movies) {
-                Toast.makeText(getContext(),"loaded",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(),"loaded",Toast.LENGTH_SHORT).show();
                 adaptor.setList(movies);
             }
         });
@@ -92,10 +87,6 @@ public class HomeFragment extends Fragment implements UserStateChange {
         return root;
     }
 
-    @Override
-    public void makeStateTrue() {
-        adaptor.setLUser_status(true);
-    }
 }
 
 

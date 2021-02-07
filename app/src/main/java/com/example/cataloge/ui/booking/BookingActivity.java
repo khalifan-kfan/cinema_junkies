@@ -36,9 +36,6 @@ public class BookingActivity extends AppCompatActivity {
        // viewmodel.init();
 
 
-        //NavHostFragment nav = Navigation.findNavController(this,R.navigation.fragment);
-        //NavController navController = Navigation.findNavController(this, R.id.fragment);Navigation
-       // NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        //get movie id and pass it to item fragment
+
     }
 }

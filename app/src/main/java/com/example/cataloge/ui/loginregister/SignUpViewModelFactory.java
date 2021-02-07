@@ -1,4 +1,4 @@
-package com.example.cataloge.ui.logreg;
+package com.example.cataloge.ui.loginregister;
 
 import android.app.Application;
 

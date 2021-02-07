@@ -2,14 +2,18 @@ package com.example.cataloge.Services;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.cataloge.ui.MTN.FixedValues;
+import com.example.cataloge.ui.MTN.ProssessMessages;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,18 +27,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import ug.sparkpl.momoapi.models.Transaction;
+import ug.sparkpl.momoapi.network.MomoApiException;
 import ug.sparkpl.momoapi.network.RequestOptions;
 import ug.sparkpl.momoapi.network.collections.CollectionsClient;
+
+import static com.example.cataloge.ui.MTN.FixedValues.MY_SECRET_SUBSCRIPTION_KEY;
 
 public class TransactionsStatusService extends Service {
 
 
     HashMap<String,Object> informap = new HashMap<>();
-    private Handler handler = new Handler();
+    Handler handler= new Handler() ;
+
     CollectionsClient client;
     RequestOptions opts;
     int i =0;
-    ArrayList<Integer> full_seats_list = new ArrayList<>();//full list to be queried
+    ArrayList<Long> full_seats_list = new ArrayList<>();//full list to be queried
     ArrayList<Integer> seats = new ArrayList();//Seats that were chosen
 
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -50,45 +58,55 @@ public class TransactionsStatusService extends Service {
     
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-      opts  = RequestOptions.builder()
+
+        opts  = RequestOptions.builder()
                 .setCollectionApiSecret(FixedValues.MY_SECRET_API_KEY)
-                .setCollectionPrimaryKey(FixedValues.MY_SECRET_SUBSCRIPTION_KEY)
+                .setCollectionPrimaryKey(MY_SECRET_SUBSCRIPTION_KEY)
                 .setCollectionUserId(FixedValues.MYSECRET_USER_ID)
                 .build();
         client = new CollectionsClient(opts);
+
         informap = (HashMap<String, Object>) intent.getSerializableExtra("Information");
-        String  ref = (String) informap.get("transactionref");
-        check(ref);
-        return super.onStartCommand(intent, flags, startId);
-    }
-    
-    private void check(String ref) {
-         new Runnable() {
+        String  ref = (String) informap.get(FixedValues.RefId);
+        //put network operation in back thead
+       // new CheckPayment().execute(ref);
+        Runnable k = new Runnable() {
             @Override
             public void run() {
                 //check reference id
                 try {
-                  Transaction t = client.getTransaction(ref);
-                 String state =  t.getStatus();
-                 if(state.toLowerCase().equals("successful")){
-                     //end process
-                     Toast.makeText(getApplicationContext(),"transaction:"+t,Toast.LENGTH_SHORT).show();
-                     UpdateSeats();
+                    Transaction t = client.getTransaction(ref);
+                    String state =  t.getStatus();
+                    //Toast.makeText(getApplicationContext(),state,Toast.LENGTH_SHORT).show();
+                    if(state.toLowerCase().contains("success")){
+                        //end process
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(),"transaction:"+state,Toast.LENGTH_SHORT).show();
+                                UpdateSeats();
+                            }
+                        });
 
-                 }else if(state.toLowerCase().equals("failed")){
-                     //end process
-                     Toast.makeText(getApplicationContext(),"transaction:"+t,Toast.LENGTH_SHORT).show();
-                     stopSelf();
-                 }else {
-                     //assuming process is pending
-                     //try again after 10 seconds
-                     handler.postDelayed(this, 10000);
-                 }
-                } catch (IOException e) {
+                    }else if(state.toLowerCase().contains("failed")||state.toLowerCase().contains("rejected")){
+                        //end process
+                        handler.post(() -> Toast.makeText(getApplicationContext(),"transaction:"+state,Toast.LENGTH_SHORT).show());
+                        stopSelf();
+                    }else {
+                        //assuming process is pending
+                        //try again after 5 seconds
+                        handler.postDelayed(this, 5000);
+                    }
+                } catch (IOException e ) {
                     e.printStackTrace();
                     //it should only try 10 times
                     if(i<10) {
-                        Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
                         handler.postDelayed(this, 10000);
                     }else {
                         Toast.makeText(getApplicationContext(),"Process failed,transaction terminated",Toast.LENGTH_SHORT).show();
@@ -96,9 +114,11 @@ public class TransactionsStatusService extends Service {
                     }
                     i++;
                 }
-               
             }
         };
+        Thread bac = new Thread(k);
+        bac.start();
+        return super.onStartCommand(intent, flags, startId);
     }
 
     private void UpdateSeats() {
@@ -115,12 +135,12 @@ public class TransactionsStatusService extends Service {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
            if(task.isSuccessful()) {
-                full_seats_list= (ArrayList<Integer>) task.getResult().get("availabe_seats");
-                for(int seat:seats){
-                    full_seats_list.remove(seat);
+                full_seats_list= (ArrayList<Long>) task.getResult().get("available_seats");
+                for(int seat=0;seat<seats.size();seat++){
+                        full_seats_list.remove(new Long(seats.get(seat)));
                }
                 //repost new list
-               seatsdoc.update("availabe_seats",full_seats_list).addOnCompleteListener(new OnCompleteListener<Void>() {
+               seatsdoc.update("available_seats",full_seats_list).addOnCompleteListener(new OnCompleteListener<Void>() {
                    @Override
                    public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()) {
@@ -137,18 +157,13 @@ public class TransactionsStatusService extends Service {
             }
         });
 
-
-
-
-
     }
-
     private void recordTransaction() {
         //first for the user
-        informap.put("username",user.getEmail());
-        informap.put("userID",userID);
-        firestore.collection("User").document(userID)
-                .collection("Ticket").add(informap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+        informap.put(FixedValues.username,auth.getCurrentUser().getEmail());//14
+        informap.put(FixedValues.userId,userID);//15
+        firestore.collection("Users").document(userID)
+                .collection("Tickets").add(informap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
             @Override
             public void onComplete(@NonNull Task<DocumentReference> task) {
              if (task.isSuccessful()) {
@@ -171,4 +186,42 @@ public class TransactionsStatusService extends Service {
         });
 
     }
+  /* public  void check(String ref){
+        new Runnable() {
+            @Override
+            public void run() {
+                //check reference id
+                try {
+                    Transaction t = client.getTransaction(ref);
+                    String state =  t.getStatus();
+                    Toast.makeText(getApplicationContext(),state,Toast.LENGTH_SHORT).show();
+                    if(state.toLowerCase().contains("success")){
+                        //end process
+                        Toast.makeText(getApplicationContext(),"transaction:"+state,Toast.LENGTH_SHORT).show();
+                        UpdateSeats();
+
+                    }else if(state.toLowerCase().contains("failed")||state.toLowerCase().contains("rejected")){
+                        //end process
+                        Toast.makeText(getApplicationContext(),"transaction:"+state,Toast.LENGTH_SHORT).show();
+                        stopSelf();
+                    }else {
+                        //assuming process is pending
+                        //try again after 5 seconds
+                        handler.postDelayed(this, 5000);
+                    }
+                } catch (IOException e ) {
+                    e.printStackTrace();
+                    //it should only try 10 times
+                    if(i<10) {
+                        Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                        handler.postDelayed(this, 10000);
+                    }else {
+                        Toast.makeText(getApplicationContext(),"Process failed,transaction terminated",Toast.LENGTH_SHORT).show();
+                        stopSelf();
+                    }
+                    i++;
+                }
+            }
+        }.run();
+    }*/
 }

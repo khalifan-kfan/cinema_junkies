@@ -16,7 +16,7 @@ public class HomeViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<Movie>> movies;
     private AppRepo repo;
-    private  MutableLiveData<Boolean> logged_in ;
+    private  MutableLiveData<Boolean> logged_in;
 
     public HomeViewModel(Application app) {
         super(app);

@@ -1,21 +1,14 @@
 package com.example.cataloge.ui.booking;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStore;
-import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -24,21 +17,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cataloge.R;
+import com.example.cataloge.ui.MTN.FixedValues;
 import com.example.cataloge.ui.MTN.MtnPayActivities;
-import com.example.cataloge.ui.booking.data.MovieTimes;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 
 public class SeatsFragment extends Fragment implements selectedlistener{
@@ -69,7 +58,7 @@ public class SeatsFragment extends Fragment implements selectedlistener{
             fulllist.add(i);
         }
         RecyclerView allSeats =v.findViewById(R.id.list_seats);
-        price = v.findViewById(R.id.amount);
+        price = v.findViewById(R.id.amount_T);
         to_Momo = v.findViewById(R.id.mtnButton);
         price.setText(R.string.money);
         //to_Momo.setEnabled(!selected.isEmpty());
@@ -87,10 +76,11 @@ public class SeatsFragment extends Fragment implements selectedlistener{
                 // your taking selected seat
                /* title definition price date time cinema seats amount pic link*/
                 if(!selected.isEmpty()) {
-                    if (!(Information.size() < 9)) {
+                    if (!(Information.size() < 13)) {
                         Intent to_pay = new Intent(container.getContext(), MtnPayActivities.class);
                         to_pay.putExtra("Information", Information);
                         container.getContext().startActivity(to_pay);
+                        getActivity().finish();
                     } else {
                         Log.e("seats fragment", "onClick: to pay List empty");
                         Toast.makeText(container.getContext(), "Something is wrong with your " +
@@ -103,16 +93,7 @@ public class SeatsFragment extends Fragment implements selectedlistener{
         });
         return v;
     }
-    // to make sure both arrays are in equal range
-    public List<Integer> intersection(List<Integer> l1,List<Integer> l2){
-        List<Integer> list = new ArrayList<>();
-        for(int i = 0;i<l2.size();i++){
-            if (l1.contains(l2.get(i))){
-                list.add(l2.get(i));
-            }
-        }
-        return list;
-    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -150,8 +131,8 @@ public class SeatsFragment extends Fragment implements selectedlistener{
         selected.add(number);
         price.setText(MessageFormat.format("Shs{0} so far", String.valueOf(amount * selected.size())));
         //to_Momo.setEnabled(!selected.isEmpty());
-        sharedViewmodel.Add_to_Selection("seats",selected);
-        sharedViewmodel.Add_to_Selection("amount",amount*selected.size());
+        sharedViewmodel.Add_to_Selection(FixedValues.seats,selected);//12
+        sharedViewmodel.Add_to_Selection(FixedValues.amount,amount*selected.size());//13
     }
 
     @Override
@@ -160,8 +141,8 @@ public class SeatsFragment extends Fragment implements selectedlistener{
         price.setText(MessageFormat.format("Shs{0} so far", String.valueOf(amount * selected.size())));
         //to_Momo.setEnabled(!selected.isEmpty());
         // since the key is the same, these adds over the data the keys already hold
-        sharedViewmodel.Add_to_Selection("seats",selected);
-        sharedViewmodel.Add_to_Selection("amount",amount*selected.size());
+        sharedViewmodel.Add_to_Selection(FixedValues.seats,selected);//12
+        sharedViewmodel.Add_to_Selection(FixedValues.amount,amount*selected.size());//13
     }
 }
 

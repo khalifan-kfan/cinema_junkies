@@ -24,6 +24,7 @@ import com.example.cataloge.R;
 import com.example.cataloge.Services.TransactionsStatusService;
 
 import java.text.DateFormat;
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -55,10 +56,9 @@ public class MtnPayActivities extends AppCompatActivity {
         /* title definition price date time cinema seats amount pic link*/
         DateFormat day = new SimpleDateFormat("EE");
         information = (HashMap<String, Object>) i.getSerializableExtra("Information");
-       // topbar = findViewById(R.id.toolbar2);
-       // setSupportActionBar(topbar);
-        String cinema = (String) information.get("cinema");
-       // topbar.setTitle(cinema);
+
+        String cinema = (String) information.get(FixedValues.cinema);
+
         seats_list= new ArrayList<>();
         seats_list = (ArrayList<Integer>) information.get("seats");
 
@@ -76,27 +76,30 @@ public class MtnPayActivities extends AppCompatActivity {
         //thumbnails
         Glide
                 .with(this)
-                .load((String) information.get("pic_link"))
+                .load((String) information.get(FixedValues.pic_link))
                 .centerCrop()
                 .placeholder(R.drawable.movie_placeholder)
                 .into(thumbnail);
 
-        title.setText((String) information.get("Title"));
+        title.setText((String) information.get(FixedValues.Title));
 
         date.setText(String.format("%s %s", new SimpleDateFormat("MMM dd,", Locale.getDefault())
-                        .format((Date) information.get("date")), day.format((Date) information.get("date"))));
-        SimpleDateFormat tym = new SimpleDateFormat("HH:mm:");
-        time.setText(tym.format((Date) information.get("time")));
-        price_per.setText(String.valueOf((int) information.get("price")));
-        definition.setText((String) information.get("definition"));
-        amount.setText(String.valueOf((int) information.get("amount")));
-        seat_.setText(String.valueOf(seats_list.size()));
+                        .format((Date) information.get(FixedValues.date)), day.format((Date) information.get(FixedValues.date))));
+        SimpleDateFormat tym = new SimpleDateFormat("HH:mm");
+        time.setText(tym.format((Date) information.get(FixedValues.time)));
+
+        price_per.setText(String.valueOf((int) information.get(FixedValues.price)));
+        definition.setText((String) information.get(FixedValues.definition));
+        amount.setText(MessageFormat.format("Shs{0}", String.valueOf((int) information.get(FixedValues.amount))));
+
+        seat_.setText(MessageFormat.format("{0} Seats", String.valueOf(seats_list.size())));
         //ui has been set
         viewmodel.getValidity().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if(!aBoolean) {
-                    Toast.makeText(MtnPayActivities.this, "number still invalid", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(MtnPayActivities.this, "number still invalid", Toast.LENGTH_SHORT).show();
+                    number.setError("number still invalid");
                 }
                 reqtopay.setEnabled(aBoolean);
             }
@@ -109,9 +112,9 @@ public class MtnPayActivities extends AppCompatActivity {
                     //further tasks to be completed in service (background) like getting transaction status
                     //recording transaction,removing chosen seats from database and making the ticket
                     // returns transaction referance
-                    information.put("transactionref",prossessMessages.getSuccess());
-                    Toast.makeText(MtnPayActivities.this, "transaction waiting for approval"+
-                            "Fill in your pin and check the dashboard for ticket if success full", Toast.LENGTH_SHORT).show();
+                    information.put(FixedValues.RefId,prossessMessages.getSuccess());//16
+                  //  Toast.makeText(MtnPayActivities.this, "transaction waiting for approval"+
+                     //       "Fill in your pin and check the dashboard for ticket if success full", Toast.LENGTH_LONG).show();
                     Intent back = new Intent(MtnPayActivities.this, MainActivity.class);
                     Intent startServicer = new Intent(MtnPayActivities.this, TransactionsStatusService.class);
                     startServicer.putExtra("Information",information);
@@ -147,7 +150,7 @@ public class MtnPayActivities extends AppCompatActivity {
         };
         number.addTextChangedListener(afterTextChangedListener);
         //view model watches results of number to activate button
-       String Amount = String.valueOf((Integer) information.get("amount"));
+       String Amount = String.valueOf((Integer) information.get(FixedValues.amount));
         reqtopay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

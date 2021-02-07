@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/popbaks"
     tools:context=".ui.MTN.MtnPayActivities">
 
     <ImageView
@@ -41,6 +42,7 @@
         android:textAlignment="center"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:background="@drawable/rounded_rectangle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/movie_pick"
         app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
@@ -54,6 +56,7 @@
         android:padding="4dp"
         android:text=""
         android:textAlignment="center"
+        android:background="@drawable/rounded_rectangle"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/title_movie"
@@ -66,6 +69,7 @@
         android:layout_height="39dp"
         android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
+        android:background="@drawable/rounded_rectangle"
         android:padding="4dp"
         android:text=""
         android:textAlignment="center"
@@ -84,6 +88,7 @@
         android:padding="4dp"
         android:text=""
         android:textAlignment="center"
+        android:background="@drawable/rounded_rectangle"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/time_movie"
@@ -158,6 +163,9 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:background="@color/black"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         android:ems="10"
         android:hint="@string/enter_number"
         android:inputType="phone"

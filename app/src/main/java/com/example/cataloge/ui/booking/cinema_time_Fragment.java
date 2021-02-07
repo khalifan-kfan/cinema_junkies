@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cataloge.R;
+import com.example.cataloge.ui.MTN.FixedValues;
 import com.example.cataloge.ui.booking.data.CinemaHall;
 import com.example.cataloge.ui.booking.data.MovieTimes;
 
@@ -86,7 +87,7 @@ public class cinema_time_Fragment extends Fragment implements toBookingSeats,mor
 
         mViewModel.setCinema_id(cinema_id);
         mViewModel.setTime_id(times_id);
-        mViewModel.Add_to_Selection("cinema",name);
+        mViewModel.Add_to_Selection(FixedValues.cinema,name);//11
         move.navigate(R.id.action_navigation_cine_times_to_navigation_seats);
     }
 

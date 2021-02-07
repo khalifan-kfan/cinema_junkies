@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/booking_navigation"
@@ -13,8 +14,6 @@
         <action
             android:id="@+id/action_navigation_days_to_navigation_cine_times"
             app:destination="@id/navigation_cine_times"
-            app:enterAnim="@anim/nav_default_pop_exit_anim"
-            app:exitAnim="@anim/nav_default_pop_enter_anim"
            />
     </fragment>
     <fragment
@@ -25,8 +24,6 @@
         <action
             android:id="@+id/action_navigation_cine_times_to_navigation_seats"
             app:destination="@id/navigation_seats"
-            app:enterAnim="@anim/nav_default_pop_enter_anim"
-            app:exitAnim="@anim/nav_default_pop_enter_anim"
             />
     </fragment>
     <fragment
@@ -34,6 +31,5 @@
         android:name="com.example.cataloge.ui.booking.SeatsFragment"
         android:label="@string/title_Seats"
         tools:layout="@layout/fragment_seats" />
-
 
 </navigation>

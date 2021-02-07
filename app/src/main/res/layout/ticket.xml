@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/TicketCad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:elevation="8dp"
+        android:padding="4dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/blur1">
+
+            <FrameLayout
+                android:id="@+id/frame"
+                android:layout_width="188dp"
+                android:layout_height="178dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="152dp"
+                    android:background="@color/black"
+                    android:src="@drawable/movie_placeholder" />
+
+                <TextView
+                    android:id="@+id/dif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|bottom"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:textColor="@color/black" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:textStyle="bold"
+                android:padding="4dp"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cinema" />
+
+            <TextView
+                android:id="@+id/date_"
+                android:layout_width="210dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:padding="4dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/email"
+                app:layout_constraintTop_toBottomOf="@+id/email" />
+
+            <TextView
+                android:id="@+id/time_tic"
+                android:layout_width="163dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:padding="4dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
+                app:layout_constraintEnd_toEndOf="@+id/email"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/date_"
+                app:layout_constraintTop_toTopOf="@+id/date_" />
+
+            <TextView
+                android:id="@+id/No_ofSeats"
+                android:layout_width="147dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:padding="2dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
+                app:layout_constraintStart_toStartOf="@+id/date_"
+                app:layout_constraintTop_toBottomOf="@+id/date_" />
+
+            <TextView
+                android:id="@+id/seats_list"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:padding="2dp"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/No_ofSeats"
+                app:layout_constraintTop_toTopOf="@+id/No_ofSeats" />
+
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="343dp"
+                android:layout_height="33dp"
+                android:layout_marginTop="8dp"
+                android:padding="4dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/No_ofSeats" />
+
+            <TextView
+                android:id="@+id/title_"
+                android:layout_width="0dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.375"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/frame"
+                />
+
+            <TextView
+                android:id="@+id/cinema"
+                android:layout_width="0dp"
+                android:layout_height="28dp"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:gravity="center_horizontal"
+                app:layout_constraintEnd_toEndOf="@+id/title_"
+                app:layout_constraintHorizontal_bias="0.428"
+                app:layout_constraintStart_toStartOf="@+id/title_"
+                app:layout_constraintTop_toBottomOf="@+id/title_" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="75dp"
+                android:textColor="@color/black"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/black"
+                android:src="@drawable/used"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/total" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="378dp"
+                android:layout_height="91dp"
+                android:layout_marginTop="8dp"
+                android:background="#C8CFF8"
+                android:gravity="center_horizontal"
+                android:padding="4dp"
+                android:text="@string/warn"
+                android:textAlignment="center"
+                android:textColor="#AE0015"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="34dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="69dp"
+                android:layout_marginRight="69dp"
+                app:layout_constraintEnd_toStartOf="@+id/frame"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/presence_online" />
+
+            <TextView
+                android:id="@+id/state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#FAE6E9"
+                android:padding="4dp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/frame"
+                app:layout_constraintHorizontal_bias="0.115"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="35dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="26dp"
+                android:layout_marginRight="26dp"
+                android:background="@color/black"
+                android:src="@drawable/expired"
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@+id/frame"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

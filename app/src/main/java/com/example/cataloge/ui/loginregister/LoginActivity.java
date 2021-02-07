@@ -1,4 +1,4 @@
-package com.example.cataloge.ui.logreg;
+package com.example.cataloge.ui.loginregister;
 
 import android.app.Activity;
 
@@ -25,12 +25,13 @@ import android.widget.Toast;
 
 import com.example.cataloge.MainActivity;
 import com.example.cataloge.R;
+import com.example.cataloge.ui.home.HomeFragment;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private LoginViewModelFactory factory;
-    UserStateChange listener;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel = new ViewModelProvider(this,factory)
                 .get(LoginViewModel.class);
 
-        listener = (UserStateChange) this;
+
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
@@ -76,7 +77,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
-
                 }
 
                 //Complete and destroy login activity once successful
@@ -139,7 +139,7 @@ public class LoginActivity extends AppCompatActivity {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
         setResult(Activity.RESULT_OK);
-        listener.makeStateTrue();
+        //listener.makeStateTrue();
         Intent i = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(i);
         finish();
