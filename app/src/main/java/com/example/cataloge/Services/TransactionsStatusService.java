@@ -69,7 +69,7 @@ public class TransactionsStatusService extends Service {
         informap = (HashMap<String, Object>) intent.getSerializableExtra("Information");
         String  ref = (String) informap.get(FixedValues.RefId);
         //put network operation in back thead
-       // new CheckPayment().execute(ref);
+       // without  that it will produce main thread  error
         Runnable k = new Runnable() {
             @Override
             public void run() {
@@ -77,7 +77,7 @@ public class TransactionsStatusService extends Service {
                 try {
                     Transaction t = client.getTransaction(ref);
                     String state =  t.getStatus();
-                    //Toast.makeText(getApplicationContext(),state,Toast.LENGTH_SHORT).show();
+                    
                     if(state.toLowerCase().contains("success")){
                         //end process
                         handler.post(new Runnable() {
@@ -99,7 +99,7 @@ public class TransactionsStatusService extends Service {
                     }
                 } catch (IOException e ) {
                     e.printStackTrace();
-                    //it should only try 10 times
+                    //it should only try 10 times,
                     if(i<10) {
                         handler.post(new Runnable() {
                             @Override
@@ -159,7 +159,7 @@ public class TransactionsStatusService extends Service {
 
     }
     private void recordTransaction() {
-        //first for the user
+        //first for the user's record
         informap.put(FixedValues.username,auth.getCurrentUser().getEmail());//14
         informap.put(FixedValues.userId,userID);//15
         firestore.collection("Users").document(userID)
@@ -186,42 +186,5 @@ public class TransactionsStatusService extends Service {
         });
 
     }
-  /* public  void check(String ref){
-        new Runnable() {
-            @Override
-            public void run() {
-                //check reference id
-                try {
-                    Transaction t = client.getTransaction(ref);
-                    String state =  t.getStatus();
-                    Toast.makeText(getApplicationContext(),state,Toast.LENGTH_SHORT).show();
-                    if(state.toLowerCase().contains("success")){
-                        //end process
-                        Toast.makeText(getApplicationContext(),"transaction:"+state,Toast.LENGTH_SHORT).show();
-                        UpdateSeats();
-
-                    }else if(state.toLowerCase().contains("failed")||state.toLowerCase().contains("rejected")){
-                        //end process
-                        Toast.makeText(getApplicationContext(),"transaction:"+state,Toast.LENGTH_SHORT).show();
-                        stopSelf();
-                    }else {
-                        //assuming process is pending
-                        //try again after 5 seconds
-                        handler.postDelayed(this, 5000);
-                    }
-                } catch (IOException e ) {
-                    e.printStackTrace();
-                    //it should only try 10 times
-                    if(i<10) {
-                        Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
-                        handler.postDelayed(this, 10000);
-                    }else {
-                        Toast.makeText(getApplicationContext(),"Process failed,transaction terminated",Toast.LENGTH_SHORT).show();
-                        stopSelf();
-                    }
-                    i++;
-                }
-            }
-        }.run();
-    }*/
+  
 }
