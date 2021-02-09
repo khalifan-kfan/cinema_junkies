@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginFormState == null) {
                     return;
                 }
-                // button is only activated when all data is well filled
+                // button is only activated when all data is well filled with out error
                 loginButton.setEnabled(loginFormState.isDataValid());
                 if (loginFormState.getUsernameError() != null) {
                     usernameEditText.setError(getString(loginFormState.getUsernameError()));
@@ -139,10 +139,11 @@ public class LoginActivity extends AppCompatActivity {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
         setResult(Activity.RESULT_OK);
-        //listener.makeStateTrue();
+      
         Intent i = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(i);
         finish();
+        //the view model will automatically process 
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
