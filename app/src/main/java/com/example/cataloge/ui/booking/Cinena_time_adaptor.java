@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cinena_time_adaptor  extends RecyclerView.Adapter<Cinena_time_adaptor.ViewHolder>{
-
+//adaptors display view dynamic views
     private List<CinemaHall> my_halls = new ArrayList<>();
     private cinema_time_Fragment ctx;
     private moreORless moreorless;
