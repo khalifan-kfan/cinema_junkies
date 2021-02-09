@@ -32,12 +32,12 @@ public  class PaymentViewmodel extends AndroidViewModel {
     Application app;
     public static MutableLiveData<ProssessMessages> prossessErrorsMutableLiveData;
     public  MutableLiveData<Boolean> validity;
-   // private mtnRepo repo;
+   
 
     public PaymentViewmodel(@NonNull Application application) {
         super(application);
         this.app = app;
-       // repo = new mtnRepo(app);
+       
         prossessErrorsMutableLiveData = new MutableLiveData<>();
         validity = new MutableLiveData<>();
     }
@@ -53,6 +53,8 @@ public  class PaymentViewmodel extends AndroidViewModel {
 
 
     public void Requesttopay(HashMap<String,String> collection){
+        //putting request to pay in async thread
+        //network operations should not run on the main thread
         new ReqestToPay().execute(collection);
 
     }
