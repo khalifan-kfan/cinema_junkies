@@ -9,15 +9,15 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.cataloge.ui.home.HomeViewModel;
 
 public class SharedViewmodelFactory implements ViewModelProvider.Factory {
-    Application app;
+    Application application;
     public SharedViewmodelFactory(Application app){
-        this.app = app;
+        this.application = app;
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-       SharedViewmodel sharedViewmodel = new SharedViewmodel(app);
+       SharedViewmodel sharedViewmodel = new SharedViewmodel(application);
         if(modelClass.isAssignableFrom(SharedViewmodel.class)){
             return(T) sharedViewmodel;
         }

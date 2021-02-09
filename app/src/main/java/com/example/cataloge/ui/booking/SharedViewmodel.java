@@ -63,15 +63,7 @@ public class SharedViewmodel extends AndroidViewModel {
     public void setPrice(int pri) {
         price.setValue(pri);
     }
-    public void init1() {
-        this.days = repo.getDays(movieID.getValue());
-    }
-    public void init2(){
-      this.cinemas = repo.getCinema_data(movieID.getValue(),day_id.getValue());
-    }
-    public void init3(){
-      // this.time_seats= repo.getSeat_data(movieID.getValue(),day_id.getValue(),cinema_id.getValue(),time_id.getValue());
-    }
+
     public void init4(String id){
         this.times = repo.getTime_data(id,movieID.getValue(),day_id.getValue());
     }
@@ -101,7 +93,7 @@ public class SharedViewmodel extends AndroidViewModel {
 
     public void setMovieID(Movie movieId,String id){
         movieID.setValue(id);
-       // Toast.makeText(getApplication().getBaseContext(),movieId.getTitle(),Toast.LENGTH_SHORT).show();
+
         Add_to_Selection(FixedValues.Title,movieId.getTitle());//7
         Add_to_Selection(FixedValues.definition,movieId.getDefinition());//8
         Add_to_Selection(FixedValues.pic_link,movieId.getPicture_link());//9
@@ -122,12 +114,10 @@ public class SharedViewmodel extends AndroidViewModel {
     }
 
     public MutableLiveData<List<MovieTimes>> getCinemaTimes(String cinemaId){
-        //times = repo.getTime_data(cinemaId,day_id.getValue(),movieID.getValue());
+
         return times;
     }
     public MutableLiveData<List<Long>> getSeats(){
-       //  time_seats= repo.getSeat_data(movieID.getValue(),day_id.getValue(),
-         //      cinema_id.getValue(),time_id.getValue());
         return time_seats;
     }
 

@@ -44,7 +44,7 @@ public class SeatsFragment extends Fragment implements selectedlistener{
     private HashMap<String ,Object > Information;
 
     public SeatsFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -52,7 +52,7 @@ public class SeatsFragment extends Fragment implements selectedlistener{
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_seats, container, false);
 
-       // sharedViewmodel.init3();
+
         fulllist =new ArrayList<>();
         for (int i = 1;i<51;i++){
             fulllist.add(i);
@@ -61,13 +61,13 @@ public class SeatsFragment extends Fragment implements selectedlistener{
         price = v.findViewById(R.id.amount_T);
         to_Momo = v.findViewById(R.id.mtnButton);
         price.setText(R.string.money);
-        //to_Momo.setEnabled(!selected.isEmpty());
+
 
         adp = new seatsadapter( fulllist,this);
         allSeats.setLayoutManager(new GridLayoutManager(v.getContext(),10));
-        //allSeats.addItemDecoration();
+
         allSeats.setAdapter(adp);
-        // allSeats.setAdapter();
+
 
         to_Momo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +99,7 @@ public class SeatsFragment extends Fragment implements selectedlistener{
         super.onActivityCreated(savedInstanceState);
         sharedViewmodel= new ViewModelProvider(requireActivity())
                 .get(SharedViewmodel.class);
-        //sharedViewmodel.init3();
+
         sharedViewmodel.getPrice().observe(requireActivity(), new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
@@ -117,9 +117,7 @@ public class SeatsFragment extends Fragment implements selectedlistener{
         sharedViewmodel.getSeats().observe(requireActivity(), new Observer<List<Long>>() {
             @Override
             public void onChanged(List<Long> integers) {
-                // seatsA = (List<Integer>) );
-                //Toast.makeText(getContext(),"and"+fulllist.get(0).getClass().getName(),Toast.LENGTH_SHORT).show();
-                //Toast.makeText(requireContext(),String.valueOf(seatsA.size()),Toast.LENGTH_SHORT).show();
+
                 adp.setAvailable(integers,fulllist);
             }
         });
@@ -130,7 +128,7 @@ public class SeatsFragment extends Fragment implements selectedlistener{
     public void add_seat(int number) {
         selected.add(number);
         price.setText(MessageFormat.format("Shs{0} so far", String.valueOf(amount * selected.size())));
-        //to_Momo.setEnabled(!selected.isEmpty());
+
         sharedViewmodel.Add_to_Selection(FixedValues.seats,selected);//12
         sharedViewmodel.Add_to_Selection(FixedValues.amount,amount*selected.size());//13
     }
@@ -139,8 +137,7 @@ public class SeatsFragment extends Fragment implements selectedlistener{
     public void remove_seat(int number) {
         selected.remove(new Integer(number));
         price.setText(MessageFormat.format("Shs{0} so far", String.valueOf(amount * selected.size())));
-        //to_Momo.setEnabled(!selected.isEmpty());
-        // since the key is the same, these adds over the data the keys already hold
+
         sharedViewmodel.Add_to_Selection(FixedValues.seats,selected);//12
         sharedViewmodel.Add_to_Selection(FixedValues.amount,amount*selected.size());//13
     }
@@ -166,7 +163,7 @@ class seatsadapter extends  RecyclerView.Adapter<seatsadapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // make colors different for active and inactive
-
+       //to easily identify the seats available
         if(!available.isEmpty()) {
             for (int k = 0; k < available.size(); k++) {
 
@@ -184,16 +181,7 @@ class seatsadapter extends  RecyclerView.Adapter<seatsadapter.ViewHolder>{
             holder.vi.setEnabled(false);
             holder.number.setText("X");
         }
-        //piece above was a life saver
-        //code logic below failed because of long values
-     /*   if(available.contains(allseats.get(position))){
-            holder.vi.setEnabled(true);
-            holder.number.setBackgroundColor(Color.parseColor(String.valueOf(R.color.teal_200)));
-            holder.number.setText(String.valueOf(allseats.get(position)));
-        }else if(!available.contains(allseats.get(position))){
-            holder.vi.setEnabled(false);
-            holder.number.setText("X");
-        }*/
+
         holder.vi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

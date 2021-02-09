@@ -171,7 +171,6 @@ class MuviTymAdaptor extends  RecyclerView.Adapter<MuviTymAdaptor.ViewHolder>{
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         TextView time;
         Button seats;
         public ViewHolder(@NonNull View itemView) {
