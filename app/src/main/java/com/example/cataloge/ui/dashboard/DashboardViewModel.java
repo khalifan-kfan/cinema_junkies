@@ -41,12 +41,13 @@ public class DashboardViewModel extends ViewModel {
         db=FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
         if(auth.getCurrentUser()!= null){
+               // initiate fetch here
             loggedUser.postValue(true);
             getTickets();
         }else {
             loggedUser.postValue(false);
         }
-       // initiate fetch here
+    
 
     }
 
@@ -106,7 +107,7 @@ public class DashboardViewModel extends ViewModel {
                                             //confirm
                                             Log.d("dashboard", "onComplete: was a successfully to history" +
                                                     "");
-                                            // now delete the ticket
+                                            // now delete the ticket in the ticket data base since its already in history 
                                             db.collection("Users").document(ticket.getUserID())
                                                     .collection("Tickets").document(ticket.DocIds).delete();
 
