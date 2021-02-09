@@ -136,6 +136,7 @@ class TicketAdaptor extends RecyclerView.Adapter<TicketAdaptor.ViewHolder>{
         Date today = new Date();
         //if today is after yesterday or tomorrow
         //also adding one day to the date before expiry just to be sure ticket is really expired
+        // the user is not allowed to use an expired ticket in this adaptor
         Calendar c = Calendar.getInstance();
         c.setTime(tickets.get(position).getTime());
         c.add(Calendar.DATE,1);
@@ -158,7 +159,6 @@ class TicketAdaptor extends RecyclerView.Adapter<TicketAdaptor.ViewHolder>{
            @Override
            public void onClick(View v) {
                //Dialog
-
                AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
                builder.setTitle("Use This Ticket");
                builder.setMessage("This ticket will be considered used if you proceed, " +
@@ -168,8 +168,7 @@ class TicketAdaptor extends RecyclerView.Adapter<TicketAdaptor.ViewHolder>{
                    public void onClick(DialogInterface dialog, int which) {
                        dialog.dismiss();
                        listener.tickettoHistory(tickets.get(position));
-
-                    //  notifyItemRemoved(position);
+                       //
                    }
                });
 
@@ -186,7 +185,6 @@ class TicketAdaptor extends RecyclerView.Adapter<TicketAdaptor.ViewHolder>{
        holder.cancel.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-
                listener.tickettoHistory(tickets.get(position));
                holder.remove(position);
            }
