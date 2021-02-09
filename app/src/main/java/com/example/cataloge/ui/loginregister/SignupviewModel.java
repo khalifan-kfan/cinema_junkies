@@ -67,6 +67,7 @@ public class SignupviewModel extends AndroidViewModel {
         }else if(!isSame(password,password2)){
             loginFormState.setValue(new LoginFormState(null, null, null, R.string.Confirm));
         } else{
+            // only situation where the sign in button should be active
             loginFormState.setValue(new LoginFormState(true,true));
         }
     }
