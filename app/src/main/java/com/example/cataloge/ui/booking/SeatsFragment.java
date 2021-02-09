@@ -72,9 +72,9 @@ public class SeatsFragment extends Fragment implements selectedlistener{
         to_Momo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // if list is not empty go to momo pat ativity
+                // if list is not empty go to momo pay ativity
                 // your taking selected seat
-               /* title definition price date time cinema seats amount pic link*/
+               
                 if(!selected.isEmpty()) {
                     if (!(Information.size() < 13)) {
                         Intent to_pay = new Intent(container.getContext(), MtnPayActivities.class);
@@ -204,9 +204,9 @@ class seatsadapter extends  RecyclerView.Adapter<seatsadapter.ViewHolder>{
     public void setAvailable(List<Long> seats,List<Integer> all){
         this.available = seats;
         this.allseats = all;
-
         notifyDataSetChanged();
-       // notifyItemRangeInserted(0,seats.size());
+      // in case a new list is imputted update view
+      
 
     }
     @Override
