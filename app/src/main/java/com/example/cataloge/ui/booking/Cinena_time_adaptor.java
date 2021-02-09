@@ -46,6 +46,7 @@ public class Cinena_time_adaptor  extends RecyclerView.Adapter<Cinena_time_adapt
         holder.name.setText(my_halls.get(position).getName());
 
         //expand movie times
+        // when a cinema is clicked it should open the list of times throug throug the interface
         holder.Iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,13 +54,14 @@ public class Cinena_time_adaptor  extends RecyclerView.Adapter<Cinena_time_adapt
                         holder.Iv.setImageResource(R.drawable.less_);
                         holder.name.setBackgroundResource(R.color.teal_700);
                         holder.name.setText(MessageFormat.format("Pick From {0}", my_halls.get(position).getName()));
-                        // call interface to open
+                        // call interface to open list of times
                         moreorless.openOrclose(my_halls.get(position).DocIds,my_halls.get(position).getName());
                     }else {
                         holder.name.setBackgroundResource(R.color.teal_200);
                         holder.name.setText(my_halls.get(position).getName());
                         holder.Iv.setImageResource(R.drawable.more_);
-                        //call interface to close view
+                        //call interface to close list of times
+                      
                         moreorless.openOrclose(null,null);
                     }
             }
