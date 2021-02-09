@@ -90,6 +90,7 @@ public class TransactionsStatusService extends Service {
 
                     }else if(state.toLowerCase().contains("failed")||state.toLowerCase().contains("rejected")){
                         //end process
+                        //run toast on main thread to notify user
                         handler.post(() -> Toast.makeText(getApplicationContext(),"transaction:"+state,Toast.LENGTH_SHORT).show());
                         stopSelf();
                     }else {
@@ -159,6 +160,8 @@ public class TransactionsStatusService extends Service {
     }
     private void recordTransaction() {
         //first for the user's record
+        // to process ticket and history
+        
         informap.put(FixedValues.username,auth.getCurrentUser().getEmail());//14
         informap.put(FixedValues.userId,userID);//15
         firestore.collection("Users").document(userID)
@@ -166,7 +169,7 @@ public class TransactionsStatusService extends Service {
             @Override
             public void onComplete(@NonNull Task<DocumentReference> task) {
              if (task.isSuccessful()) {
-                 //then for data keeping
+                 //then for data keeping for the cinema's record
                  firestore.collection("Transaction")
                          .add(informap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                      @Override
@@ -175,11 +178,13 @@ public class TransactionsStatusService extends Service {
                            Toast.makeText(getApplicationContext(),"Process Completed" +
                                    "Please check your dash board for the ticket ",Toast.LENGTH_SHORT).show();
                        }
-                       stopSelf();//end service
+                       stopSelf();
+                         //end service to save resources
                      }
                  });
              }else {
                  //retry
+                 //still to be implemented
              }
             }
         });
