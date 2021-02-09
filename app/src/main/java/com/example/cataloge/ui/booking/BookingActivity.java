@@ -29,12 +29,10 @@ public class BookingActivity extends AppCompatActivity {
         String  id = intent.getStringExtra("ID");
         factory = new SharedViewmodelFactory(this.getApplication());
         viewmodel = new ViewModelProvider(this,factory).get(SharedViewmodel.class);
-        //Toast.makeText(BookingActivity.this,id+"and"+movie.DocIds,Toast.LENGTH_SHORT).show();
+       // initiate  shared view model for the three fragments
         viewmodel.setMovieID(movie,id);
 
-       // viewmodel.init1();
-       // viewmodel.init();
-
+   
 
 
     }
