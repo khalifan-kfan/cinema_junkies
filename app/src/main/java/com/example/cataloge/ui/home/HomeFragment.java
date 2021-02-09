@@ -76,6 +76,7 @@ public class HomeFragment extends Fragment {
                 if (atBottom) {
                 }
                 if (dy > 0 && MainActivity.navView.isShown()) {
+                    // remove lower navigation bar when scroll down  
                     MainActivity.navView.setVisibility(View.GONE);
                 } else if (dy < 0 ) {
                     MainActivity.navView.setVisibility(View.VISIBLE);
@@ -158,9 +159,8 @@ class MovieAdaptor extends RecyclerView.Adapter<MovieAdaptor.ViewHolder>{
                     });
                     AlertDialog dialog = builder.create();
                     dialog.show();
-                }else {
-                    //Toast.makeText(ctx,"and"+value.get(position).DocIds,Toast.LENGTH_SHORT).show();
-                   // move ito booking activity
+                }else{
+                   // move it booking activity
                     Intent book = new Intent(ctx, BookingActivity.class);
                     book.putExtra("MovieID", value.get(position));
                     book.putExtra("ID",value.get(position).DocIds);
@@ -200,12 +200,10 @@ class MovieAdaptor extends RecyclerView.Adapter<MovieAdaptor.ViewHolder>{
             director= view.findViewById(R.id.director);
             dimention = view.findViewById(R.id._3d);
             sound = view.findViewById(R.id._sound);
-            // for trailor links in discription
-            //text= view.findViewById(R.id.Descriptions);
-            //text.setMovementMethod(LinkMovementMethod.getInstance());
+           
             lead = view.findViewById(R.id.leads);
             view_dates = view.findViewById(R.id.button_book);
-            description = view.findViewById(R.id.Descriptions);//expands when clicked
+            description = view.findViewById(R.id.Descriptions);
 
         }
     }
