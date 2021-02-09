@@ -41,7 +41,7 @@ public class LoginViewModel extends AndroidViewModel {
 
 
     public void login(String username, String password) {
-        //firebase login
+        //firebase login in the repository class that returns 0 if success and 1 if failed
            int suxes = repo.login(username,password);
            if(suxes == 0){
                loginResult.setValue(new LoginResult(new LoggedInUserView(username)));
@@ -76,7 +76,7 @@ public class LoginViewModel extends AndroidViewModel {
         }
     }
 
-    // A placeholder password validation check
+    // password validation check
     private boolean isPasswordValid(String password) {
         return password != null && password.trim().length() > 5;
     }
