@@ -98,7 +98,7 @@ public class BookingRepo {
 
     MutableLiveData<List<CinemaHall>> getCinema_data(String movieid,String dayId){
      loadCinemas(movieid, dayId);
-     // Cinema_data.setValue(cinemas);
+   
       return Cinema_data;
     }
     void loadCinemas(String movieid, String dayId){
@@ -117,7 +117,7 @@ public class BookingRepo {
                                             if (doc.getType() == DocumentChange.Type.ADDED) {
                                                 final CinemaHall halls = doc.getDocument()
                                                         .toObject(CinemaHall.class).withID(doc.getDocument().getId());
-                                                //Toast.makeText(app.getBaseContext(), String.valueOf(tymsList.size()), Toast.LENGTH_SHORT).show();
+                                              
                                                 cinemas.add(halls);
 
                                             }
@@ -185,9 +185,7 @@ public class BookingRepo {
                         if(error!=null){
                             if(value.exists()){
                                 seats[0] = value.toObject(MovieTimes.class).withID(value.getId());
-                                //seats[0].setAvailabe_seats((List<Integer>) value.get("available_seats"));
-                                //seats[0].setMovie_time((Date) value.getTimestamp("movie_time").toDate());
-                                //seats[0].withID(value.getId());
+                               //pass the movie model that contains the list
                             }else {
                                 Toast.makeText(app.getBaseContext(),"Could'nt seem to find the seats",Toast.LENGTH_SHORT).show();
                             }
