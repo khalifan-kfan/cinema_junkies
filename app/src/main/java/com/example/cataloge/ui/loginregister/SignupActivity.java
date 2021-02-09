@@ -70,6 +70,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
         // alternative , observe firebase user
+        // post data in login result class
        viewModal.getLoginResult().observe(this, new Observer<LoginResult>() {
             @Override
             public void onChanged(@Nullable LoginResult loginResult) {
