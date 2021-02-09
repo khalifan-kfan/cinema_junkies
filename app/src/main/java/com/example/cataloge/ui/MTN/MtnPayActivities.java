@@ -36,7 +36,7 @@ import java.util.UUID;
 public class MtnPayActivities extends AppCompatActivity {
     TextView title,date,time,price_per,definition,seat_,amount;
     ImageView thumbnail;
-    //Toolbar topbar;
+  
     ArrayList<Integer> seats_list;
     EditText number;
     ProgressBar loading;
@@ -73,7 +73,7 @@ public class MtnPayActivities extends AppCompatActivity {
         definition = findViewById(R.id.definition);
         seat_= findViewById(R.id.seats_chosen);
         amount = findViewById(R.id.total_amount);
-        //thumbnails
+      
         Glide
                 .with(this)
                 .load((String) information.get(FixedValues.pic_link))
@@ -93,12 +93,12 @@ public class MtnPayActivities extends AppCompatActivity {
         amount.setText(MessageFormat.format("Shs{0}", String.valueOf((int) information.get(FixedValues.amount))));
 
         seat_.setText(MessageFormat.format("{0} Seats", String.valueOf(seats_list.size())));
-        //ui has been set
+        //ui has been set with data 
         viewmodel.getValidity().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if(!aBoolean) {
-                   // Toast.makeText(MtnPayActivities.this, "number still invalid", Toast.LENGTH_SHORT).show();
+                 
                     number.setError("number still invalid");
                 }
                 reqtopay.setEnabled(aBoolean);
@@ -109,11 +109,11 @@ public class MtnPayActivities extends AppCompatActivity {
             public void onChanged(ProssessMessages prossessMessages) {
                 if(prossessMessages.isSent_sussessfully()){
                     //send user back to home page
-                    //further tasks to be completed in service (background) like getting transaction status
-                    //recording transaction,removing chosen seats from database and making the ticket
+                    //further tasks to be completed in service (background) on a background thread like getting transaction status
+                    //recording transaction, removing chosen seats from database and making the ticket which is sent to firebase
                     // returns transaction referance
                     information.put(FixedValues.RefId,prossessMessages.getSuccess());//16
-                  //  Toast.makeText(MtnPayActivities.this, "transaction waiting for approval"+
+               
                      //       "Fill in your pin and check the dashboard for ticket if success full", Toast.LENGTH_LONG).show();
                     Intent back = new Intent(MtnPayActivities.this, MainActivity.class);
                     Intent startServicer = new Intent(MtnPayActivities.this, TransactionsStatusService.class);
@@ -149,7 +149,7 @@ public class MtnPayActivities extends AppCompatActivity {
             }
         };
         number.addTextChangedListener(afterTextChangedListener);
-        //view model watches results of number to activate button
+        //view model watches results of number to activate button only if the number is valid and full
        String Amount = String.valueOf((Integer) information.get(FixedValues.amount));
         reqtopay.setOnClickListener(new View.OnClickListener() {
             @Override
