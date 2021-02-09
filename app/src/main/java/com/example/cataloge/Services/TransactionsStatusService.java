@@ -122,7 +122,6 @@ public class TransactionsStatusService extends Service {
     }
 
     private void UpdateSeats() {
-
        //first remove picked seats
         seats = (ArrayList<Integer>) informap.get("seats");
         DocumentReference seatsdoc = firestore.collection("Movies")
