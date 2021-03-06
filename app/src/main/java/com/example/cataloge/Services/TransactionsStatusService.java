@@ -61,7 +61,7 @@ public class TransactionsStatusService extends Service {
 
         opts  = RequestOptions.builder()
                 .setCollectionApiSecret(FixedValues.MY_SECRET_API_KEY)
-                .setCollectionPrimaryKey(MY_SECRET_SUBSCRIPTION_KEY)
+                .setCollectionPrimaryKey(FixedValues.MY_SECRET_SUBSCRIPTION_KEY)
                 .setCollectionUserId(FixedValues.MYSECRET_USER_ID)
                 .build();
         client = new CollectionsClient(opts);
